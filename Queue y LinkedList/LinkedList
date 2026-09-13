@@ -1,0 +1,128 @@
+public class LinkedList{
+    private Node head;
+    private Node tail;
+
+    public LinkedList(){
+        this.head = null;
+        this.tail = null;
+    }
+
+    public boolean isEmpty(){
+        return head == null;
+    }
+
+    public void addFirst(String item){
+        Node newNode = new Node(item);
+        if (isEmpty()){
+            head= newNode;
+            tail = newNode;
+        } else {
+            newNode.next = head;
+            head= newNode;
+            
+        }
+    }
+
+    public void addLast(String item){
+        Node newNode = new Node(item);
+        if (isEmpty()){
+            head= newNode;
+            tail = newNode;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+        }
+    }
+
+    public void addBetween(int n, String item){
+        int counter = 1;
+        Node newNode = new Node(item);
+        Node pointer = head;
+        if (isEmpty()){
+            head = newNode;
+        } else {
+            while (counter < n && pointer.next != null){
+                pointer = pointer.next;
+                counter++;
+            }
+            newNode.next = pointer.next
+            pointer.next = newNode
+        }
+    }
+
+    public void printList(){
+        if (isEmpty()){
+            System.out.println("The list is empty. Nothing to show.");
+        } else {
+            Node pointer = head;
+            while (pointer != null){
+                System.out.println(pointer.data);
+                pointer = pointer.next;
+            }
+        }
+    }
+
+    public void deleteStart(){
+        if (isEmpty()){
+            System.out.println("The list is empty. Nothing to delete")
+        } else {
+            Node pointer = head;
+            head = pointer.next;
+            pointer.next = null;
+
+            if (head == null){
+                tail = null;
+            }
+        }
+    }
+
+    public void deleteEnd(){
+        if (isEmpty()){
+            System.out.println("The list is empty. Nothing to delete");
+        } else if(head == tail) {
+            head = null;
+            tail == null;
+        } else {
+            Node pointer = tail;
+            while (pointer.next != null){
+                pointer = pointer.next;
+            }
+            pointer.next = null;
+            tail = pointer;
+        }
+    }
+
+    public void deleteAtN(int n){
+        int counter = 1;
+        Node pointer = head;
+        if (isEmpty()){
+            System.out.println("The list is empty. Nothing to delete.");
+        }
+        if (n==1){
+            deleteStart();
+            return;
+        }
+        if (head == tail){
+            System.out.println("The list has only one element. Element deleted.")
+            head = null;
+            tail = null;
+        }
+        while (counter < (n-1) && pointer.next != null){
+            pointer = pointer.next;
+            counter++;
+        }
+        if (pointer.next == null){
+            System.out.println("Position out of bounds.")
+            return;
+        }
+
+        Node temp = pointer.next;
+        pointer.next = temp.next;
+        temp.next = null; 
+
+        if (pointer.next == null){
+            tail = pointer;
+        }
+    }
+}
+            
